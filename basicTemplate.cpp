@@ -1,10 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define pb push_back
+#define F first
+#define S second
+#define sd(x) scanf("%d", &x)
+#define sl(x) scanf("%lld", &x)
+#define ss(x) scanf("%s", x)
+#define sc(x) scanf(" %c", &x)
 #define debug(X) cerr << " --> " << #X << " = " << X << endl
+#define clr(x) memset(x, 0, sizeof x)
+#define all(x) x.begin(), x.end()
+#define rep(i, begin, end) for(__typeof(end) i =(begin)-((begin)>(end));i!=(end)-((begin)>(end));i+=1-2*((begin)>(end)))
+#define endl "\n"
+typedef long long ll; typedef pair<int, int> pii; typedef vector<int> vi;
+const int N = 512345, LG = 21, mod = 1000000007, M = N;
+const double eps = 1e-3, pi = acos(-1.0);
 
-typedef long long ll;
-const int N = 512345, mod = 1000000007, M = N, LG = 21;
 template<class T>
 
 inline T add(T a, T b)
@@ -189,7 +200,7 @@ void precompute(int n, int A[N])
             if(A[rmq[i][j - 1]] < A[rmq[i + (1 << (j - 1))][j - 1]])
                 rmq[i][j] = rmq[i][j - 1];
             else
-                rmq[i + (1 << (j - 1))][j - 1];
+                rmq[i][j] = rmq[i + (1 << (j - 1))][j - 1];
         }
     }
 }
@@ -247,6 +258,21 @@ int query(int x, int y)
 		for(int z = y; z > 0; z -= (z & (-z)))
 			ret += bit[x][z];
 	return ret;
+}
+
+///DFS
+int parent[N];
+vector<int> adj[N];
+void dfs(int v)
+{
+    for(int u : adj[v])
+    {
+        if(u == parent[v]){
+
+        }
+        parent[u] = v;
+        dfs(u);
+    }
 }
 
 
