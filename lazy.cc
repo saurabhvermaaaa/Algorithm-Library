@@ -3,7 +3,7 @@ using namespace std;
 #define pb push_back
 #define F first
 #define S second
-#define sd(x) read(x)
+#define sd(x) scanf("%d", &x)
 #define sl(x) scanf("%lld", &x)
 #define ss(x) scanf("%s", x)
 #define sc(x) scanf(" %c", &x)
@@ -46,14 +46,6 @@ public:
 	void clearChange(int root);
 }segtree;
 int prime[2] = {2, 5};
-#define gc getchar_unlocked
-inline void read(int &x){
-    x=0;
-    register char c=gc();
-    for(;c<'0' || c>'9';c=gc());
-        for(;c>='0' && c<='9';c=gc())
-            x=(x<<3)+(x<<1)+(c-'0');
-}
 int sum[N][2];
 void SegTree :: clearChange(int root)
 {
@@ -167,17 +159,6 @@ pair<ll, ll> SegTree :: query(int root, int l, int r)
         return {q.F + qq.F, q.S + qq.S};
     }
 }
-inline void write(ll x){
- register char buffor[35];
- register int i=0;
- do{
-       buffor[i++]=(x%10)+'0';
-       x/=10;
-    } while(x);
-   i--;
-    while(i>=0) putchar_unlocked(buffor[i--]);
-    putchar_unlocked('\n');
-}
 void pre()
 {
     sum[0][0] = 0, sum[0][1] = 0;
@@ -235,84 +216,7 @@ int main()
                 ans += min(q.F, q.S);
             }
         }
-        write(ans);
-        //printf("%lld\n", ans);
+        printf("%lld\n", ans);
     }
 	return 0;
 }
-/*
-1
-5 5
-2 4 3 5 5
-3 2 4
-3 2 5
-2 2 4 1
-1 3 3 10
-3 1 5
-
-1
-5 10
-1 1 1 1 10
-2 3 5 100
-3 1 4
-2 1 5 1000
-3 1 4
-3 1 5
-2 1 5 100
-3 1 1
-1 1 3 10
-3 1 3
-3 4 5
-
-1
-10 10
-1 2 3 4 1 2 3 4 1 2
-2 3 7 10
-1 1 2 10
-1 1 10 1000
-3 1 5
-3 6 10
-3 1 10
-2 6 10 10
-2 3 6 1000
-3 9 10
-3 3 7
-
-2
-10 3
-1 2 3 4 1 2 3 4 1 2
-2 6 10 10
-2 3 6 1000
-3 3 7
-
-5 5
-5 25 125 25 5
-1 3 4 5
-2 2 3 25
-1 2 4 5
-3 2 4
-3 1 5
-
-
-1
-7 7
-1 2 1 2 1 2 1
-1 2 5 5
-2 3 7 25
-1 3 3 125
-1 2 4 625
-1 1 7 5
-3 1 5
-3 2 7
-
-1
-10 6
-1 2 1 10 4 10 1 1 1 2
-1 7 10 4
-2 6 7 2
-1 6 10 1
-2 2 9 1
-1 1 5 5
-3 5 8
-
-*/
