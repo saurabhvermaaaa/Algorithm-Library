@@ -7,6 +7,7 @@ using namespace std;
 #define sl(x) scanf("%lld", &x)
 #define ss(x) scanf("%s", x)
 #define sc(x) scanf(" %c", &x)
+#define sz(x) x.size()
 #define debug(X) cerr << " --> " << #X << " = " << X << endl
 #define clr(x) memset(x, 0, sizeof x)
 #define all(x) x.begin(), x.end()
@@ -15,7 +16,11 @@ using namespace std;
 typedef long long ll; typedef pair<int, int> pii; typedef vector<int> vi;
 const int N = 512345, LG = 21, mod = 1000000007, M = N;
 const double eps = 1e-3, pi = acos(-1.0);
-
+const ll INF = 1123456789123456789LL;
+/*
+freopen("in.txt", "r", stdin);
+freopen("out.txt", "w", stdout);
+*/
 template<class T>
 
 inline T add(T a, T b)
@@ -218,15 +223,16 @@ int minimum(int start, int length, int A[N])
 }
 
 ///DIJKSTRA
+vector<pair<int, ll>> adj[N];
 vector<ll> dijkstra(int src, int n)
 {
     vector<ll> dist(n + 1, INF);
     dist[src] = 0;
-    priority_queue<pair<ll, int>> Q;
+    set<pair<ll, int>> Q;
     Q.insert({0, src});
     while(!Q.empty())
     {
-        ll w = -Q.begin() -> F, v = Q.begin()->S;
+        ll w = Q.begin() -> F, v = Q.begin()->S;
         Q.erase(Q.begin());
         for(int i = 0; i < adj[v].size(); ++i)
         {
@@ -234,9 +240,9 @@ vector<ll> dijkstra(int src, int n)
             ll wt = adj[v][i].second;
             if(w + wt < dist[u])
             {
-                Q.erase({-dist[u], u});
+                Q.erase({dist[u], u});
                 dist[u] = w + wt;
-                Q.insert({-dist[u], u});
+                Q.insert({dist[u], u});
             }
         }
     }
@@ -274,8 +280,19 @@ void dfs(int v)
         dfs(u);
     }
 }
-
-
-
-
-
+///MEX
+int mex(set<int>& s)
+{
+    int ans = 0;
+    for(int z : s)
+    {
+        if(z < ans)
+            continue;
+        else if(z == ans)
+            ++ans;
+        else
+            return ans;
+    }
+    return ans;
+}
+///KRUSKAL
